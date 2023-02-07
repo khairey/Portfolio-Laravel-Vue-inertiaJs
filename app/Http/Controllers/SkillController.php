@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use App\Exceptions\InvalidOrderException;
+use App\Http\Resources\SkillResource;
+use Throwable;
 
 class SkillController extends Controller
 {
@@ -14,7 +19,8 @@ class SkillController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Skills/index');
+        $skills = SkillResource::collection(Skill::all());
+        return Inertia::render('Skills/index', compact('skills'));
     }
 
     /**
@@ -35,7 +41,22 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+ 
+            $request->validate([
+                'image' => ['required', 'image'],
+                'name' => ['required', 'min:3']
+            ]);
+            if ($request->hasFile('image')) {
+                $image = $request->file('image')->store('skills');
+                Skill::create([
+                    'name' => $request->name,
+                    'image' => $image
+                ]);
+
+                return Redirect::route('skills.index')->with('message', 'Skill created successfully.');
+            }
+            return Redirect::back();
+        
     }
 
     /**
