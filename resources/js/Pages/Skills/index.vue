@@ -44,7 +44,10 @@
                                 <img :src="skill.image" alt="">
                             </td>
                             <td class="px-6 py-4">
-                                Edit/delete
+                                <Link :href="route('skills.edit',skill.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                /
+                                <Link :href="'skills/'+skill.id" method="DELETE" as="button" type="button" class="font-medium text-red-600 dark:text-blue-500 hover:underline">delete</Link>
+                                
                             </td>
                         </tr>
                     </tbody>
