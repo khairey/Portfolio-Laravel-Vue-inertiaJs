@@ -1,15 +1,15 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import Frontend from '@/Layouts/Frontend.vue'
-import Hero from '@/Components/Frontend/Hero.vue'
-import Promote from '@/Components/Frontend/Promote.vue'
-import About from '@/Components/Frontend/About.vue'
+import Frontend from '@/Layouts/Frontend.vue';
+import Hero from '@/Components/Frontend/Hero.vue';
+import Promote from '@/Components/Frontend/Promote.vue';
+import About from '@/Components/Frontend/About.vue';
+import Skills from '@/Components/Frontend/Skills.vue';
+import Portfolio from '@/Components/Frontend/Portfolio.vue';
 
 defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+    skills: Object,
+    projects: Object,
 });
 </script>
 
@@ -19,5 +19,7 @@ defineProps({
         <Hero/>
         <Promote/>
         <About/>
+        <Skills :skills="skills"/>
+        <Portfolio :skills="skills" :projects="projects"/>
     </Frontend>
 </template>
