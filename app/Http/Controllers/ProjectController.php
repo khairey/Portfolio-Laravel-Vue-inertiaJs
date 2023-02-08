@@ -113,6 +113,6 @@ class ProjectController extends Controller
     {
         Storage::delete($project->image);
         $project->delete();
-        return Redirect::back();
+        return Redirect::back()->with('message', 'Project Deleted successfully.');
     }
 }

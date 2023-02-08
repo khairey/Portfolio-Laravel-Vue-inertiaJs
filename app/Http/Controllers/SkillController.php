@@ -104,6 +104,6 @@ class SkillController extends Controller
     {
         Storage::delete($skill->image);
         $skill->delete();
-        return Redirect::back();
+        return Redirect::back()->with('message', 'Skill Deleted successfully.');
     }
 }
